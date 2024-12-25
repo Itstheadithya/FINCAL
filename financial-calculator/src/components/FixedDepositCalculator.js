@@ -1,5 +1,6 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useState } from "react";
+import "./FixedDepositCalculator.css"; // Importing the CSS file
 
 const FixedDepositCalculator = () => {
     const [principal, setPrincipal] = useState("");
@@ -29,41 +30,45 @@ const FixedDepositCalculator = () => {
     };
 
     return (
-        <div>
-            <h2>Fixed Deposit Calculator</h2>
-            <form onSubmit={calculateFD}>
-                <div>
+        <div className="fd-calculator-container">
+            <h2 className="fd-calculator-title">Fixed Deposit Calculator</h2>
+            <form className="fd-calculator-form" onSubmit={calculateFD}>
+                <div className="form-group">
                     <label>Principal Amount (₹):</label>
                     <input
                         type="number"
                         value={principal}
                         onChange={(e) => setPrincipal(e.target.value)}
+                        className="form-input"
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Interest Rate (%):</label>
                     <input
                         type="number"
                         value={interestRate}
                         onChange={(e) => setInterestRate(e.target.value)}
+                        className="form-input"
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Time Period (months):</label>
                     <input
                         type="number"
                         value={timePeriod}
                         onChange={(e) => setTimePeriod(e.target.value)}
+                        className="form-input"
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Compounding Frequency:</label>
                     <select
                         value={compoundingFrequency}
                         onChange={(e) => setCompoundingFrequency(e.target.value)}
+                        className="form-select"
                     >
                         <option value="monthly">Monthly</option>
                         <option value="quarterly">Quarterly</option>
@@ -71,16 +76,16 @@ const FixedDepositCalculator = () => {
                         <option value="yearly">Yearly</option>
                     </select>
                 </div>
-                <button type="submit">Calculate</button>
+                <button type="submit" className="submit-button">Calculate</button>
             </form>
 
             {results && (
-                <div>
-                    <h3>Results:</h3>
+                <div className="result-container">
+                    <h3 className="result-title">Results:</h3>
                     <p>Maturity Amount: ₹{results.maturityAmount}</p>
                     <p>Interest Earned: ₹{results.interestEarned}</p>
                     <h4>Breakdown:</h4>
-                    <table>
+                    <table className="result-table">
                         <thead>
                             <tr>
                                 <th>Month</th>

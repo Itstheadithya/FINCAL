@@ -1,5 +1,6 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useState } from "react";
+import "./PostOfficeMISCalculator.css"; // Importing the CSS file
 
 const PostOfficeMISCalculator = () => {
     const [principalAmount, setPrincipalAmount] = useState("");
@@ -27,42 +28,45 @@ const PostOfficeMISCalculator = () => {
     };
 
     return (
-        <div>
-            <h2>Post Office MIS Calculator</h2>
-            <form onSubmit={calculateMIS}>
-                <div>
+        <div className="mis-calculator-container">
+            <h2 className="mis-calculator-title">Post Office MIS Calculator</h2>
+            <form className="mis-calculator-form" onSubmit={calculateMIS}>
+                <div className="form-group">
                     <label>Principal Amount (₹):</label>
                     <input
                         type="number"
                         value={principalAmount}
                         onChange={(e) => setPrincipalAmount(e.target.value)}
+                        className="form-input"
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Annual Interest Rate (%):</label>
                     <input
                         type="number"
                         value={interestRate}
                         onChange={(e) => setInterestRate(e.target.value)}
+                        className="form-input"
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Investment Period (Years):</label>
                     <input
                         type="number"
                         value={investmentPeriod}
                         onChange={(e) => setInvestmentPeriod(e.target.value)}
+                        className="form-input"
                         required
                     />
                 </div>
-                <button type="submit">Calculate</button>
+                <button type="submit" className="submit-button">Calculate</button>
             </form>
 
-            {monthlyInterest && (
-                <div>
-                    <h3>Results:</h3>
+            {monthlyInterest !== null && (
+                <div className="result-container">
+                    <h3 className="result-title">Results:</h3>
                     <p>Monthly Interest: ₹{monthlyInterest}</p>
                     <p>This amount will be credited to your account every month for the investment period.</p>
                 </div>

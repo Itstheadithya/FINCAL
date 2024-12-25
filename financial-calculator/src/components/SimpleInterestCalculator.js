@@ -1,5 +1,6 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useState } from "react";
+import "./SimpleInterestCalculator.css"; // Import the CSS file
 
 const SimpleInterestCalculator = () => {
     const [principalAmount, setPrincipalAmount] = useState("");
@@ -29,42 +30,45 @@ const SimpleInterestCalculator = () => {
     };
 
     return (
-        <div>
-            <h2>Simple Interest Calculator</h2>
-            <form onSubmit={calculateSI}>
-                <div>
+        <div className="simple-interest-container">
+            <h2 className="simple-interest-title">Simple Interest Calculator</h2>
+            <form className="simple-interest-form" onSubmit={calculateSI}>
+                <div className="form-group">
                     <label>Principal Amount (₹):</label>
                     <input
                         type="number"
                         value={principalAmount}
                         onChange={(e) => setPrincipalAmount(e.target.value)}
+                        className="form-input"
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Rate of Interest (%):</label>
                     <input
                         type="number"
                         value={interestRate}
                         onChange={(e) => setInterestRate(e.target.value)}
+                        className="form-input"
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Time Period (Years):</label>
                     <input
                         type="number"
                         value={timePeriod}
                         onChange={(e) => setTimePeriod(e.target.value)}
+                        className="form-input"
                         required
                     />
                 </div>
-                <button type="submit">Calculate</button>
+                <button type="submit" className="submit-button">Calculate</button>
             </form>
 
             {simpleInterest !== null && (
-                <div>
-                    <h3>Results:</h3>
+                <div className="result-container">
+                    <h3 className="result-title">Results:</h3>
                     <p>Simple Interest: ₹{simpleInterest}</p>
                     <p>Total Amount (Principal + Interest): ₹{totalAmount}</p>
                 </div>

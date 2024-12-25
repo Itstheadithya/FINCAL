@@ -1,5 +1,6 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useState } from "react";
+import "./SukanyaSamriddhiCalculator.css"; // Import the CSS file
 
 const SukanyaSamriddhiCalculator = () => {
     const [annualDeposit, setAnnualDeposit] = useState("");
@@ -29,42 +30,45 @@ const SukanyaSamriddhiCalculator = () => {
     };
 
     return (
-        <div>
-            <h2>Sukanya Samriddhi Yojana (SSY) Calculator</h2>
-            <form onSubmit={calculateMaturityAmount}>
-                <div>
+        <div className="ssy-container">
+            <h2 className="ssy-title">Sukanya Samriddhi Yojana (SSY) Calculator</h2>
+            <form className="ssy-form" onSubmit={calculateMaturityAmount}>
+                <div className="form-group">
                     <label>Annual Deposit (₹):</label>
                     <input
                         type="number"
                         value={annualDeposit}
                         onChange={(e) => setAnnualDeposit(e.target.value)}
+                        className="form-input"
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Interest Rate (%):</label>
                     <input
                         type="number"
                         value={interestRate}
                         onChange={(e) => setInterestRate(e.target.value)}
+                        className="form-input"
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Years of Deposit (15 years):</label>
                     <input
                         type="number"
                         value={yearsOfDeposit}
                         onChange={(e) => setYearsOfDeposit(e.target.value)}
+                        className="form-input"
                         required
                     />
                 </div>
-                <button type="submit">Calculate</button>
+                <button type="submit" className="submit-button">Calculate</button>
             </form>
 
             {maturityAmount !== null && (
-                <div>
-                    <h3>Results:</h3>
+                <div className="result-container">
+                    <h3 className="result-title">Results:</h3>
                     <p>Total Maturity Amount: ₹{maturityAmount}</p>
                     <p>Total Interest Earned: ₹{totalInterest}</p>
                 </div>

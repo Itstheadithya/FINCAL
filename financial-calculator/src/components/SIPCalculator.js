@@ -1,5 +1,6 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useState } from "react";
+import "./SIPCalculator.css"; // Import the CSS file
 
 const SIPCalculator = () => {
     const [principal, setPrincipal] = useState("");
@@ -27,7 +28,7 @@ const SIPCalculator = () => {
     };
 
     return (
-        <div>
+        <div className="sip-calculator">
             <h2>SIP Calculator</h2>
             <form onSubmit={calculateSIP}>
                 <div>
@@ -37,6 +38,7 @@ const SIPCalculator = () => {
                         value={principal}
                         onChange={(e) => setPrincipal(e.target.value)}
                         required
+                        placeholder="Enter monthly investment"
                     />
                 </div>
                 <div>
@@ -46,6 +48,7 @@ const SIPCalculator = () => {
                         value={rate}
                         onChange={(e) => setRate(e.target.value)}
                         required
+                        placeholder="Enter annual rate of return"
                     />
                 </div>
                 <div>
@@ -55,15 +58,16 @@ const SIPCalculator = () => {
                         value={tenure}
                         onChange={(e) => setTenure(e.target.value)}
                         required
+                        placeholder="Enter investment period"
                     />
                 </div>
                 <button type="submit">Calculate</button>
             </form>
 
             {results.length > 0 && (
-                <div>
+                <div className="results">
                     <h3>Results:</h3>
-                    <table border="1">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Year</th>

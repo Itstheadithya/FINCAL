@@ -1,5 +1,6 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useState } from "react";
+import "./RecurringDepositCalculator.css"; // Importing the CSS file
 
 const RecurringDepositCalculator = () => {
     const [monthlyDeposit, setMonthlyDeposit] = useState("");
@@ -27,46 +28,49 @@ const RecurringDepositCalculator = () => {
     };
 
     return (
-        <div>
-            <h2>Recurring Deposit Calculator</h2>
-            <form onSubmit={calculateRD}>
-                <div>
+        <div className="rd-calculator-container">
+            <h2 className="rd-calculator-title">Recurring Deposit Calculator</h2>
+            <form className="rd-calculator-form" onSubmit={calculateRD}>
+                <div className="form-group">
                     <label>Monthly Deposit (₹):</label>
                     <input
                         type="number"
                         value={monthlyDeposit}
                         onChange={(e) => setMonthlyDeposit(e.target.value)}
+                        className="form-input"
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Annual Interest Rate (%):</label>
                     <input
                         type="number"
                         value={interestRate}
                         onChange={(e) => setInterestRate(e.target.value)}
+                        className="form-input"
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Investment Period (Years):</label>
                     <input
                         type="number"
                         value={investmentPeriod}
                         onChange={(e) => setInvestmentPeriod(e.target.value)}
+                        className="form-input"
                         required
                     />
                 </div>
-                <button type="submit">Calculate</button>
+                <button type="submit" className="submit-button">Calculate</button>
             </form>
 
             {results && (
-                <div>
-                    <h3>Results:</h3>
+                <div className="result-container">
+                    <h3 className="result-title">Results:</h3>
                     <p>Maturity Amount: ₹{results.maturityAmount}</p>
                     <p>Interest Earned: ₹{results.interestEarned}</p>
                     <h4>Breakdown:</h4>
-                    <table>
+                    <table className="result-table">
                         <thead>
                             <tr>
                                 <th>Quarter</th>
