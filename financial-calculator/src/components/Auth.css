@@ -6,13 +6,13 @@
     padding: 20px;
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    min-height: calc(100vh - 120px);
+    min-height: calc(100vh - 200px);
 }
 
 .auth-container h2 {
     font-size: 2rem;
     color: #0073e6;
-    margin-bottom: 20px;
+    margin: 20px;
 }
 
 .auth-form {
@@ -40,7 +40,7 @@
     font-size: 1rem;
     border: 1px solid #ddd;
     border-radius: 4px;
-    width: 100%;
+    width: 95%;
 }
 
 .auth-form .form-group input:focus {

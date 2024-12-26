@@ -238,3 +238,74 @@ def ssy_maturity_calculator(request):
     }
 
     return JsonResponse({'result': result})
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from .serializers import RegisterSerializer, LoginSerializer
+from rest_framework import serializers
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'password', 'email')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        # Use create_user to ensure password is hashed
+        user = User.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data['email'],
+            password=validated_data['password']
+        )
+        return user
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+
+# User Registration View
+class RegisterUserView(APIView):
+    def post(self, request, *args, **kwargs):
+        # Use RegisterSerializer to validate and save the user
+        serializer = RegisterSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()  # Create user with validated data
+            token, created = Token.objects.get_or_create(user=user)  # Generate token
+            if created:
+                print("A new token was created!")
+            else:
+                print("The token already exists.")
+            return Response({
+                "token": token.key,
+                "message": "User registered successfully!"
+            }, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# User Login View
+class LoginView(APIView):
+    def post(self, request, *args, **kwargs):
+        # Validate and authenticate the user using the LoginSerializer
+        serializer = LoginSerializer(data=request.data)
+        if serializer.is_valid():
+            username = serializer.validated_data['username']
+            password = serializer.validated_data['password']
+            user = authenticate(username=username, password=password)
+            if user:
+                # Generate token if user exists
+                token, created = Token.objects.get_or_create(user=user)
+                return Response({
+                    "token": token.key,
+                    "message": "Login successful!"
+                }, status=status.HTTP_200_OK)
+            return Response({
+                "error": "Invalid credentials"
+            }, status=status.HTTP_401_UNAUTHORIZED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
