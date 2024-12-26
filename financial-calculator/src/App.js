@@ -9,6 +9,8 @@ import RecurringDepositCalculator from './components/RecurringDepositCalculator'
 import SimpleInterestCalculator from './components/SimpleInterestCalculator';
 import SIPCalculator from './components/SIPCalculator';
 import SukanyaSamriddhiCalculator from './components/SukanyaSamriddhiCalculator';
+import Login from './components/Login'; // Import Login
+import Signup from './components/Signup'; // Import Signup
 
 import './App.css';
 
@@ -45,6 +47,8 @@ const App = () => {
             <main className="main-content">
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
                     <Route path="/sip" element={<SIPCalculator />} />
                     <Route path="/compound-interest" element={<CompoundInterestCalculator />} />
                     <Route path="/gst" element={<GSTCalculator />} />
